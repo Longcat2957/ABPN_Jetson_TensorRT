@@ -3,7 +3,7 @@ import numpy as np
 from libs.utils import *
 
 if __name__ == "__main__":
-    model = edgeSR_trt("edgeSR_max_qat_200.jit.pt")
+    model = edgeSR_trt("edgeSR_qat_jit.pt")
     imgTensor = getTensorFromPath("ms.png")
     srCV2Obj = model.inference(imgTensor)
     
