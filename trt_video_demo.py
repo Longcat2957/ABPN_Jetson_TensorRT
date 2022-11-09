@@ -8,6 +8,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     "--video", type=str,
 )
+
 def preprocess(x:np.ndarray):
     x = cv2.cvtColor(x, cv2.COLOR_BGR2RGB)
     x = np.transpose(x, [2, 0, 1])
@@ -21,7 +22,8 @@ def postprocess(x:np.ndarray):
     return x    
 
 def bicubicResize(x:np.ndarray):
-    x = cv2.resize(x, dsize=(640*3, 360*3), interpolation=cv2.INTER_LINEAR)
+    h, w, _ = x.shape
+    x = cv2.resize(x, dsize=(w*3, h*3), interpolation=cv2.INTER_LINEAR)
     return x
 
 if __name__ == "__main__":
@@ -33,7 +35,7 @@ if __name__ == "__main__":
     
     # load model
     trt_model = edgeSR_TRT_Engine(
-        engine_path="./model/360x640_1080x1920.trt", lr_size=(360,640)
+        engine_path="./model/120x214_360x642.trt", lr_size=(120,214)
     )
     
     frameRate = 33
@@ -45,7 +47,7 @@ if __name__ == "__main__":
         bicubic = bicubicResize(frame)
         input_np = preprocess(frame)
         sr_np = postprocess(trt_model(input_np))
-        
+        print(frame.shape)
         key = cv2.waitKey(frameRate)
         if key == 27:
             break
