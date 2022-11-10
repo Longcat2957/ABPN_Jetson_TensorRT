@@ -6,10 +6,10 @@ from libs.utils import *
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
-    "--video", type=str,
+    "--video", type=str, default="ms03_vide.mp4"
 )
 parser.add_argument(
-    "--model", type=str,
+    "--model", type=str, default="x4_224_320.trt"
 )
 
 def preprocess(x:np.ndarray):
