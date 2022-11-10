@@ -43,7 +43,7 @@ if __name__ == "__main__":
     
     # load model
     trt_model = edgeSR_TRT_Engine(
-        engine_path=opt.model, scale=4, lr_size=size
+        engine_path=model_path scale=4, lr_size=size
     )
     
     frameRate = 20
