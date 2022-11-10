@@ -18,8 +18,10 @@ def openImage(filepath):
 
 
 class edgeSR_TRT_Engine(object):
-    def __init__(self, engine_path, lr_size=(224, 320)):
+    def __init__(self, engine_path, scale:int=3, lr_size=(224, 320)):
         self.lr_size = lr_size
+        self.scale = scale
+        self.hr_size = (lr_size[0] * scale, lr_size[1] * scale)
         
         
         logger = trt.Logger(trt.Logger.WARNING)
@@ -55,7 +57,7 @@ class edgeSR_TRT_Engine(object):
         
         data = [out['host'] for out in self.outputs]
         data = data[0]
-        sr = np.reshape(data, (3, self.lr_size[0] * 3, self.lr_size[1] * 3))
+        sr = np.reshape(data, (3, self.hr_size[0], self.hr_size[1]))
         return sr
     
         
