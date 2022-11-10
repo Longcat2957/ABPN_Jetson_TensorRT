@@ -18,7 +18,7 @@ def openImage(filepath):
 
 
 class edgeSR_TRT_Engine(object):
-    def __init__(self, engine_path, scale:int=3, lr_size=(224, 320)):
+    def __init__(self, engine_path, scale:int=4, lr_size=(224, 320)):
         self.lr_size = lr_size
         self.scale = scale
         self.hr_size = (lr_size[0] * scale, lr_size[1] * scale)

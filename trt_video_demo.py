@@ -21,9 +21,9 @@ def postprocess(x:np.ndarray):
     x = cv2.cvtColor(x, cv2.COLOR_RGB2BGR)
     return x    
 
-def bicubicResize(x:np.ndarray):
+def bicubicResize(x:np.ndarray, scale:int=4):
     h, w, _ = x.shape
-    x = cv2.resize(x, dsize=(w*3, h*3), interpolation=cv2.INTER_LINEAR)
+    x = cv2.resize(x, dsize=(w*scale, h*scale), interpolation=cv2.INTER_LINEAR)
     return x
 
 if __name__ == "__main__":
@@ -35,7 +35,7 @@ if __name__ == "__main__":
     
     # load model
     trt_model = edgeSR_TRT_Engine(
-        engine_path="./model/120x214_360x642.trt", lr_size=(120,214)
+        engine_path="./model/x4_270_480.trt", scale=4, lr_size=(270,480)
     )
     
     frameRate = 33
