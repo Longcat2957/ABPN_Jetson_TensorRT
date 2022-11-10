@@ -6,7 +6,7 @@ from libs.utils import *
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
-    "--video", type=str, default="ms03_vide.mp4"
+    "--video", type=str, default="ms03_vid.mp4"
 )
 parser.add_argument(
     "--model", type=str, default="x4_224_320.trt"
