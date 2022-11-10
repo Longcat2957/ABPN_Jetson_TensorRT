@@ -8,6 +8,12 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     "--video", type=str,
 )
+parser.add_argument(
+    "--model", type=str,
+)
+parser.add_argument(
+    "--size", type=tuple,
+)
 
 def preprocess(x:np.ndarray):
     x = cv2.cvtColor(x, cv2.COLOR_BGR2RGB)
@@ -35,7 +41,7 @@ if __name__ == "__main__":
     
     # load model
     trt_model = edgeSR_TRT_Engine(
-        engine_path="./model/x4_270_480.trt", scale=4, lr_size=(270,480)
+        engine_path=opt.model, scale=4, lr_size=(270,480)
     )
     
     frameRate = 20
