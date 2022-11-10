@@ -4,7 +4,7 @@ from libs.utils import *
 
 if __name__ == "__main__":
     trt_model = edgeSR_TRT_Engine(
-        engine_path="./model/baseline6.trt", lr_size=(224,320)
+        engine_path="./model/x4_224_320.trt", lr_size=(224,320)
     )
     lrOrig = openImage("ms3_01.png")
     lrObj = np.transpose(lrOrig, [2, 0, 1])
