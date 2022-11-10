@@ -11,9 +11,6 @@ parser.add_argument(
 parser.add_argument(
     "--model", type=str,
 )
-parser.add_argument(
-    "--size", type=tuple,
-)
 
 def preprocess(x:np.ndarray):
     x = cv2.cvtColor(x, cv2.COLOR_BGR2RGB)
@@ -39,9 +36,14 @@ if __name__ == "__main__":
     except:
         raise ValueError(f"Failed to open video file")
     
+    model_path = os.path.join("./model", opt.model)
+    size = opt.model[3:10]
+    h, w = map(int, size.split("_"))
+    size = (h, w)
+    
     # load model
     trt_model = edgeSR_TRT_Engine(
-        engine_path=opt.model, scale=4, lr_size=opt.size
+        engine_path=opt.model, scale=4, lr_size=size
     )
     
     frameRate = 20
