@@ -38,7 +38,7 @@ if __name__ == "__main__":
         engine_path="./model/x4_270_480.trt", scale=4, lr_size=(270,480)
     )
     
-    frameRate = 33
+    frameRate = 20
 
     while True:
         ret, frame = cap.read()
@@ -47,7 +47,6 @@ if __name__ == "__main__":
         bicubic = bicubicResize(frame)
         input_np = preprocess(frame)
         sr_np = postprocess(trt_model(input_np))
-        print(frame.shape)
         key = cv2.waitKey(frameRate)
         if key == 27:
             break
