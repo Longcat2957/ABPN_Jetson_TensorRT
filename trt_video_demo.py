@@ -51,6 +51,19 @@ if __name__ == "__main__":
     
     frameRate = opt.framerate
 
+    LR_WINDOW = "LR_WINDOW"
+    BICUBIC_WINDOW = "BICUBIC"
+    SR_WINDOW = "SUPER-RESOLUTION"
+    
+    cv2.namedWindow(LR_WINDOW)
+    cv2.moveWindow(LR_WINDOW, 20, 20)
+    cv2.namedWindow(BICUBIC_WINDOW)
+    cv2.moveWindow(BICUBIC_WINDOW, 20, 20 + 500)
+    cv2.namedWindow(SR_WINDOW)
+    cv2.moveWindow(SR_WINDOW, 20 + 1500, 20 + 500)    
+        
+
+
     while True:
         ret, frame = cap.read()
         if not ret:
@@ -61,10 +74,12 @@ if __name__ == "__main__":
         key = cv2.waitKey(frameRate)
         if key == 27:
             break
+
+
         
-        cv2.imshow("lr", frame)
-        cv2.imshow("bicubic", bicubic)
-        cv2.imshow("sr", sr_np)
+        cv2.imshow(LR_WINDOW, frame)
+        cv2.imshow(BICUBIC_WINDOW, bicubic)
+        cv2.imshow(SR_WINDOW, sr_np)
         
     if cap.isOpened():
         cap.release()
