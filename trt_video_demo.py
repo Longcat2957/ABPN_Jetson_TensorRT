@@ -24,12 +24,13 @@ def preprocess(x:np.ndarray):
 def postprocess(x:np.ndarray):
     x = x.astype(np.uint8)
     x = np.transpose(x, [1, 2, 0])
+
     x = cv2.cvtColor(x, cv2.COLOR_RGB2BGR)
     return x    
 
 def bicubicResize(x:np.ndarray, scale:int=4):
     h, w, _ = x.shape
-    x = cv2.resize(x, dsize=(w*scale, h*scale), interpolation=cv2.INTER_LINEAR)
+    x = cv2.resize(x, dsize=(w*scale, h*scale), interpolation=cv2.INTER_NEAREST)
     return x
 
 def horizontalFusion(bi:np.ndarray, sr:np.ndarray):
