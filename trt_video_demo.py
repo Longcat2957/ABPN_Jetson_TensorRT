@@ -11,6 +11,9 @@ parser.add_argument(
 parser.add_argument(
     "--model", type=str, default="x4_224_320.trt"
 )
+parser.add_argument(
+    "--framerate", type=int, default=30
+)
 
 def preprocess(x:np.ndarray):
     x = cv2.cvtColor(x, cv2.COLOR_BGR2RGB)
@@ -46,7 +49,7 @@ if __name__ == "__main__":
         engine_path=model_path, scale=4, lr_size=size
     )
     
-    frameRate = 20
+    frameRate = opt.framerate
 
     while True:
         ret, frame = cap.read()
