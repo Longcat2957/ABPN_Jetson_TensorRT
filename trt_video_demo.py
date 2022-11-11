@@ -62,6 +62,11 @@ if __name__ == "__main__":
     LR_WINDOW = "LR_WINDOW"
     BICUBIC_SR_WINDOW = "BICUBIC vs SUPER-RESOLUTION"
 
+    cv2.namedWindow(LR_WINDOW)
+    cv2.namedWindow(BICUBIC_SR_WINDOW)
+    cv2.moveWindow(LR_WINDOW, 30, 20)
+    cv2.moveWindow(BICUBIC_SR_WINDOW, 30, 500)
+
     while True:
         ret, frame = cap.read()
         if not ret:
